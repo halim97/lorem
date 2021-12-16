@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React ,{useState} from 'react';
 import './App.css';
+import text from './data';
+
 
 function App() {
+  const [newTxt,setNewTxt]=useState([]);
+  const [index,setIndex]=useState(0);
+  const txt=()=>{
+    setNewTxt(text.slice(0,index+1))
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>TIRED OF BORING LOREM IPSUM?</h1>
+      <div className='one'>
+        <h4>Paragraphs:</h4>
+        <input type='number' min='1' max='9' onChange={(event)=>{setIndex(event.target.value-1);console.log(index)}}></input>
+        <button onClick={txt} >GENERATE</button>
+      </div>
+      <article className='lorem-text'>
+        {newTxt.map((item, index) => {
+          return <p key={index}>{item}</p>;
+        })}
+      </article>
+
     </div>
   );
 }
